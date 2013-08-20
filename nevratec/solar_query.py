@@ -2,10 +2,11 @@ import os
 import sys, urllib2
 from xml.etree.ElementTree import fromstring
 from math import *
+import matplotlib.pyplot as plt
 from datetime import date
 import csv
 import urllib
-from numpy import array, append, delete
+from numpy import array, append, delete, linspace
 
 def import_text(filename, separator):
     for line in csv.reader(open(filename), delimiter=separator, skipinitialspace=True):
@@ -30,7 +31,7 @@ def binary_search(a, x):
 
 def query(address):
     address = str(address.decode('utf-8'))
-    print repr(address)
+    print 'address:',address
     page = "http://nominatim.openstreetmap.org/search?"
     page += urllib.urlencode(dict(q=address, format='xml', polygon=1))
     #fetch html source for page
@@ -41,7 +42,7 @@ def query(address):
         print "ERROR: building not in database"
 
     ###get gps coordinates from polygonpoints
-    print html
+    #print html
     coords_list = fromstring(html).find('place').get("polygonpoints").lstrip('[[').rstrip(']]').split('],[')
 
     coords_gps = []
@@ -68,7 +69,7 @@ def query(address):
 
     num_coords = len(coords_gps)
 
-    assert(num_coords >= 4)
+    #assert(num_coords >= 4)
 
     coords_cartesian = []
 
@@ -123,6 +124,7 @@ def query(address):
     print "current month:", month
 
     #optimal inclination angle
+
     return area
     opt_angle_file = 'tmp1.dat'
 
@@ -167,7 +169,6 @@ def query(address):
     assert(opt_angle != -9999)
 
     print "optimum angle:", opt_angle
-    return opt_angle
 
     #sun irrandiance per m2 at optimal inclination angle
 
