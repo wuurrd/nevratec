@@ -1,6 +1,7 @@
 from nevratec.app import app
 from nevratec.solar_query import query
 from flask import render_template, request
+import traceback
 
 
 @app.route("/")
@@ -10,5 +11,8 @@ def index():
 
 @app.route('/solar_calc', methods=["POST"])
 def calculate_solar():
-    value = query(request.form['address'])
+    try:
+        value = query(request.form['address'])
+    except Exception, e:
+        value = traceback.format_exc(e)
     return render_template('solar.template', value=value)
