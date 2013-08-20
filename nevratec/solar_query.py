@@ -43,8 +43,11 @@ def query(address):
 
     ###get gps coordinates from polygonpoints
     #print html
-    coords_list = fromstring(html).find('place').get("polygonpoints").lstrip('[[').rstrip(']]').split('],[')
-
+    try:
+        coords_list = fromstring(html).find('place').get("polygonpoints").lstrip('[[').rstrip(']]').split('],[')
+    except:
+        print 'Error finding polygon points for %s' % address
+        return
     coords_gps = []
 
     for c in coords_list:
@@ -181,4 +184,3 @@ def query(address):
 
     #cumulative energy costs saved vs. time from area and local t=0 --> 0
     #price data
-
