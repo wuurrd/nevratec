@@ -2,11 +2,9 @@ import os
 import sys, urllib2
 from xml.etree.ElementTree import fromstring
 from math import *
-import matplotlib.pyplot as plt
 from datetime import date
 import csv
 import urllib
-from numpy import array, append, delete, linspace
 
 def import_text(filename, separator):
     for line in csv.reader(open(filename), delimiter=separator, skipinitialspace=True):
@@ -135,7 +133,7 @@ def query(address):
     for entry in import_text(opt_angle_file, ' '):
         data.append(entry)
 
-    data = delete(data,0,0)
+    data.pop(0)
 
     Nx = len(data)
     Ny = len(data[0])
