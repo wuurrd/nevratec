@@ -27,6 +27,9 @@ def binary_search(a, x):
 
 #read input arguments
 
+class GPSError(Exception):
+    pass
+
 def query(address):
     address = str(address.decode('utf-8'))
     print 'address:',address
@@ -37,15 +40,14 @@ def query(address):
     try:
         html = urllib2.urlopen(page).read()
     except:
-        print "ERROR: building not in database"
+        raise GPSError("ERROR: building not in database")
 
     ###get gps coordinates from polygonpoints
     #print html
     try:
         coords_list = fromstring(html).find('place').get("polygonpoints").lstrip('[[').rstrip(']]').split('],[')
     except:
-        print 'Error finding polygon points for %s' % address
-        return
+        raise GPSError('Error finding polygon points for %s' % address)
     coords_gps = []
 
     for c in coords_list:
