@@ -116,6 +116,8 @@ def query(address):
 
     area = 0.5 * abs(area)
 
+    return area
+
     print "building area:", int(area), "m2"
 
     #current month
@@ -124,54 +126,9 @@ def query(address):
 
     print "current month:", month
 
-    #optimal inclination angle
+    #optimal inclination angle - fetch from database
 
-    return area
-    opt_angle_file = 'tmp1.dat'
-
-    data = []
-    for entry in import_text(opt_angle_file, ' '):
-        data.append(entry)
-
-    data.pop(0)
-
-    Nx = len(data)
-    Ny = len(data[0])
-
-    print "Nx:", Nx
-    print "Ny:", Ny
-
-    x0 = -30.000000
-    y0 = -35.000000
-
-    dx = 0.025
-    dy = 0.025
-
-    x = []
-    tmp = x0
-    for i in range(0,Nx):
-        x.append(tmp)
-        tmp += dx
-
-    y = []
-    tmp = y0
-    for i in range(0,Ny):
-        y.append(tmp)
-        tmp += dy
-
-    lat = coords_gps[0][0]
-    lon = coords_gps[0][1]
-
-    ind_x = binary_search(x,lon)
-    ind_y = binary_search(y,lat)
-
-    opt_angle = data[ind_x][ind_y]
-
-    assert(opt_angle != -9999)
-
-    print "optimum angle:", opt_angle
-
-    #sun irrandiance per m2 at optimal inclination angle
+    #sun irrandiance per m2 at optimal inclination angle - fetch from database
 
     #installation price
 
