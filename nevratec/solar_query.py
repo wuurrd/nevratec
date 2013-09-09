@@ -141,3 +141,6 @@ def query(address):
 
     #cumulative energy costs saved vs. time from area and local t=0 --> 0
     #price data
+
+if __name__ == '__main__':
+    print query(' '.join(sys.argv))
