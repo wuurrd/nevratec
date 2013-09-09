@@ -35,7 +35,7 @@ def get_solar_intensity(longitude, latitude):
                                  'degreedays': 'true',
                                  'outputchoicebuttons': 'text',
                                  'sbutton': 'Calculate',
-                                 'outputformatchoice': 'window',
+                                 'outputformatchoice': 'csv',
                                  'optimalchoice': '',
                                  'latitude': str(latitude),
                                  'longitude': str(longitude),
